@@ -17,10 +17,17 @@ int createSegTree(int arr[], int *segTree, int start, int end, int segIndex) {
   return segTree[segIndex];
 }
 
+int findNextHighestBinaryPower(int n) {
+  int ans = 1;
+  while(n>0) {
+    ans = ans<1;;
+    n = n/2;
+  }
+  return ans;
+}
+
 int findSegSize(int n) {
-  int x = (int)(ceil(log2(n))); 
-  int segSize = 2*(int)pow(2, x) - 1; 
-  return segSize;
+  return findNextHighestBinaryPower(n); 
 }
 
 int * createSegTree(int arr[], int n, int segSize) {
@@ -46,7 +53,6 @@ void updateValue(int array[], int *segTree, int nodeIndex, int index, int newVal
     return;
   }
   if (start <=index && index <=end) {
-    cout<<"updating"<< nodeIndex<<" with index"<<start<<","<<end<<endl;
     segTree[nodeIndex] += (newValue - array[index]);
     if (start != end) {
       updateValue(array, segTree, nodeIndex * 2 + 1, index, newValue, start, getMid(start, end));
